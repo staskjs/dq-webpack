@@ -21,7 +21,7 @@ if (APP_ENV === 'production') {
   stylesFilename = '[name]-[hash].css';
 }
 
-module.exports = function(params = {}) {
+module.exports = function(rootDir, params = {}) {
   const babelNodeExcept = params.babelNodeExcept || [];
 
   if (babelNodeExcept.indexOf('dq') === -1) {
@@ -31,7 +31,7 @@ module.exports = function(params = {}) {
   let config = {
 
     output: {
-      path: path.join(__dirname, 'public', 'build'),
+      path: path.join(rootDir, 'public', 'build'),
       publicPath: '/build/',
       filename: outputFilename,
     },
@@ -101,8 +101,8 @@ module.exports = function(params = {}) {
     resolve: {
       extensions: ['.js', '.vue', '.json', '.min.js'],
       alias: {
-        config:   path.join(__dirname, 'config'),
-        jquery: path.join(__dirname, 'node_modules', 'jquery', 'dist', 'jquery'),
+        config:   path.join(rootDir, 'config'),
+        jquery: path.join(rootDir, 'node_modules', 'jquery', 'dist', 'jquery'),
       }
     },
 
@@ -114,7 +114,7 @@ module.exports = function(params = {}) {
   config = new Config().merge(config);
 
   if (APP_ENV === 'production') {
-    config.merge(require('./webpack.common.production'));
+    config.merge(require('./webpack.common.production')(rootDir));
   }
 
   return config;

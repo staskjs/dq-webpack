@@ -7,7 +7,7 @@ This package contains common config for webpack
     ```javascript
     const buildBaseConfig = require('dq-webpack');
 
-    const baseConfig = buildBaseConfig({});
+    const baseConfig = buildBaseConfig(__dirname, {});
 
     const config = baseConfig.merge({
 
