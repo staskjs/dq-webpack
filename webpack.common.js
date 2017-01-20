@@ -114,7 +114,8 @@ module.exports = function(rootDir, params = {}) {
   config = new Config().merge(config);
 
   if (APP_ENV === 'production') {
-    config.merge(require('./webpack.common.production')(rootDir));
+    const productionParams = params.production != null ? params.production : {};
+    config.merge(require('./webpack.common.production')(rootDir, productionParams));
   }
 
   return config;

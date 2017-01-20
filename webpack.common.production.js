@@ -2,7 +2,10 @@ const webpack = require('webpack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const path = require('path');
 
-module.exports = function(rootDir) {
+module.exports = function(rootDir, params = {}) {
+  const publicDir = params.publicDir != null
+    ? params.publicDir
+    : path.join(rootDir, 'public');
   return {
     devtool: false,
 
@@ -12,14 +15,14 @@ module.exports = function(rootDir) {
         sourceMap: false,
       }),
       new CleanWebpackPlugin(['build'], {
-        root: path.join(rootDir, 'public'),
+        root: publicDir,
         verbose: true,
         dry: false,
       }),
       function() {
         this.plugin("done", function(stats) {
           const fs = require('fs');
-          const buildPath = path.join(rootDir, 'public', 'build');
+          const buildPath = path.join(publicDir, 'build');
           if (!fs.existsSync(buildPath)) {
             fs.mkdirSync(buildPath);
           }
