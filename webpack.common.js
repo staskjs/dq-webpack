@@ -85,7 +85,6 @@ module.exports = function(rootDir, params = {}) {
         jQuery: 'jquery'
       }),
       new ExtractTextPlugin(stylesFilename),
-      new webpack.NoErrorsPlugin(),
       new webpack.optimize.CommonsChunkPlugin({
         name: 'common',
         minChunks: params.minChunks || 2,
