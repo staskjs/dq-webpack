@@ -2,6 +2,7 @@ const dotEnv = require('dotenv');
 const path = require('path');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const WebpackNotifierPlugin = require('webpack-notifier');
 const { Config } = require('webpack-config');
 
 dotEnv.config();
@@ -74,6 +75,7 @@ module.exports = function(rootDir, params = {}) {
     },
 
     plugins: [
+      new WebpackNotifierPlugin(),
       new webpack.DefinePlugin({
         WP_APP_ENV: JSON.stringify(APP_ENV),
         'process.env': {
