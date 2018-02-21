@@ -90,6 +90,7 @@ module.exports = function(rootDir, params = {}) {
       new webpack.optimize.CommonsChunkPlugin({
         name: 'common',
         minChunks: params.minChunks || 2,
+        children: true,
       }),
       new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en/),
       new webpack.LoaderOptionsPlugin({
