@@ -1,5 +1,5 @@
 const webpack = require('webpack');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
+// const CleanWebpackPlugin = require('clean-webpack-plugin');
 const path = require('path');
 
 module.exports = function(rootDir, params = {}) {
@@ -14,11 +14,11 @@ module.exports = function(rootDir, params = {}) {
         exclude: /\.min.js$/,
         sourceMap: false,
       }),
-      new CleanWebpackPlugin(['build'], {
-        root: publicDir,
-        verbose: true,
-        dry: false,
-      }),
+      // new CleanWebpackPlugin(['build'], {
+        // root: publicDir,
+        // verbose: true,
+        // dry: false,
+      // }),
       function() {
         this.plugin("done", function(stats) {
           const fs = require('fs');
